@@ -6,12 +6,16 @@
 
 ### Setup IAM user on AWS
 
-- Go to [AWS Single Sign-On](https://theodo.awsapps.com/start/#/) and loggin to your account (if you don't have one, ask for it to be created).
-- Setup a new IAM User in your AWS account with admin privileges and programmatic access.
-- Open AWS [Identity and Access Managment service (IAM)](https://console.aws.amazon.com/iam/home?region=eu-west-1) and add a user.
-- Select **Programmatic access** and **AWS Management Console access** access types in _Step 1 - Set User Details_
-- Attach **AdministratorAccess** policy in _Step 2 -Set Permissions_
+- Go to [AWS Single Sign-On](https://kooalys.awsapps.com/start#/) and loggin to your account (if you don't have one, ask for it to be created).
+- Go to your personal environment in [DEVELOPMENT] then go to **Management Console**
+- Open AWS by searching "IAM" in the search bar or go to [Identity and Access Managment service (IAM)](https://console.aws.amazon.com/iam/home?region=eu-west-1) and add a user.
+- **_Step 1 - Set User Details_**: Select **Programmatic access** and **AWS Management Console access**
+- **_Step 2 -Set Permissions_**: choose option **Attach existing policies directly** then select **AdministratorAccess** 
+- Click on **Next:Tags** then **Next:Review** and finally **Create User**.
 - At the end of the process, write down the **\$USER_ACCESS_KEY** and **\$USER_SECRET_ACCESS_KEY**.
+- In case where you didn't write down the key access, you can go to Users then click on the user you just created and select **Security Credentials** to write them down.
+
+
 
 ### Configure the user on your machine
 
