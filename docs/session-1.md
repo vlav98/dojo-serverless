@@ -23,7 +23,7 @@ yarn deploy
 
 That's it! Once your stack is deployed:
 
-- Go to [AWS Single Sign-On](https://theodo.awsapps.com/start/#/) and loggin to your account.
+- Go to [AWS Single Sign-On](https://kooalys.awsapps.com/start#/) and loggin to your account.
 - Go on [Cloudformation](https://eu-west-1.console.aws.amazon.com/cloudformation/home?region=eu-west-1) interface to check out the ressources that have been created
 - Go on [API Gateway](https://eu-west-1.console.aws.amazon.com/apigateway/home?region=eu-west-1) interface to check out your API and your routes. Write down your API id !
 - Go on [AWS Lambda](https://eu-west-1.console.aws.amazon.com/lambda/home?region=eu-west-1) to check out your lambdas
