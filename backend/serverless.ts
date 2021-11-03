@@ -38,6 +38,18 @@ const serverlessConfiguration: AwsConfig.Serverless = {
         },
       ],
     },
+    virus: {
+      handler: 'virus.main',
+      events: [
+        {
+          http: {
+            method: 'get',
+            path: `virus`,
+            cors: true,
+          }
+        }
+      ]
+    }
   },
   resources: {
     Resources: {
