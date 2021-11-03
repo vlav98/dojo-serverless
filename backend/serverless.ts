@@ -1,3 +1,4 @@
+import { rawListeners } from 'process';
 import * as AwsConfig from 'serverless/aws';
 
 import ApiGatewayErrors from './resources/apiGatewayErrors';
@@ -44,7 +45,7 @@ const serverlessConfiguration: AwsConfig.Serverless = {
         {
           http:  {
             method: 'get',
-            path: `virus/:id`,
+            path: `virus/{id}`,
             cors: true
           },
         }, 
@@ -54,7 +55,23 @@ const serverlessConfiguration: AwsConfig.Serverless = {
             path: 'virus',
             cors: true,
           }
+        }, 
+        {
+          http: {
+            method: 'delete',
+            path: 'virus/{id}',
+            cors: true,
+          }
         },
+        {
+          schedule: {
+            name: 'create-virus',
+            description: 'create viruses',
+            rate: 'rate(1 minute)',
+            enabled: true,
+
+          }
+        }
       ]
     }
   },
