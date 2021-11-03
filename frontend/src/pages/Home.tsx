@@ -65,22 +65,24 @@ const getRandomVirus = (id: string) => ({
 
 export default () => {
   const [viruses, setViruses] = useState<VirusProps[]>([]);
- useAsync(
-   async() => {
-     const response = await fetch(
-       `${backendBaseUrl}/virus`, 
-       {method: "GET"},
-       );
-       const  {viruses}  = await response.json();
-       console.log(viruses)
-     setViruses(viruses.map(({id}: {id: string})=> getRandomVirus(id)));
-   });
-   
- const addVirus = () =>
- setViruses((prevViruses) => prevViruses.concat(getRandomVirus(v4())));
+  useAsync(
+    async () => {
+      const response = await fetch(
+        `${backendBaseUrl}/virus`,
+        { method: "GET" },
+      );
+      const { viruses } = await response.json();
+      console.log(viruses)
+      setViruses(viruses.map(({ id }: { id: string }) => getRandomVirus(id)));
+    });
 
-  const killVirus = (virusId: string) =>
-    setViruses((prevViruses) => prevViruses.filter(({ id }) => id !== virusId));
+  const addVirus = () => {
+    //  setViruses((prevViruses) => prevViruses.concat(getRandomVirus(v4())))
+  };
+
+  const killVirus = (virusId: string) => {
+    // setViruses((prevViruses) => prevViruses.filter(({ id }) => id !== virusId))
+  };
 
   return (
     <>
