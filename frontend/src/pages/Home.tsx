@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useAsync } from 'react-use';
 import { Typography, Row, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { v4 } from 'uuid';
+
 
 import virus1 from 'assets/Virus1.png';
 import virus2 from 'assets/Virus2.png';
@@ -10,17 +12,10 @@ import virus3 from 'assets/Virus3.png';
 import virus4 from 'assets/Virus4.png';
 import virus5 from 'assets/Virus5.png';
 import virus6 from 'assets/Virus6.png';
-import axios from 'axios';
+
 
 const backendBaseUrl = process.env.REACT_APP_API_BASE_URL || '';
-const getVirus = () => {
-  axios
-    .get(`${backendBaseUrl}/virus`)
-    .then(response => {
-      console.log(response)
-    })
-    .catch(err=>console.log(err))  
-}
+
 const VirusImgs = [virus1, virus2, virus3, virus4, virus5, virus6];
 
 const { Title, Text } = Typography;
@@ -61,22 +56,28 @@ const Virus = styled.img<VirusProps>`
 
 const getRandomPosition = (n: number) => Math.floor(Math.random() * n);
 
-const getRandomVirus = () => ({
-  id: v4(),
+const getRandomVirus = (id: string) => ({
+  id,
   positionX: getRandomPosition(100),
   positionY: getRandomPosition(100),
   src: VirusImgs[getRandomPosition(6)],
 });
 
 export default () => {
-  const [viruses, setViruses] = useState<VirusProps[]>([
-    getRandomVirus(),
-    getRandomVirus(),
-    getRandomVirus(),
-  ]);
-
-  const addVirus = () =>
-    setViruses((prevViruses) => prevViruses.concat(getRandomVirus()));
+  const [viruses, setViruses] = useState<VirusProps[]>([]);
+ useAsync(
+   async() => {
+     const response = await fetch(
+       `${backendBaseUrl}/virus`, 
+       {method: "GET"},
+       );
+       const  {viruses}  = await response.json();
+       console.log(viruses)
+     setViruses(viruses.map(({id}: {id: string})=> getRandomVirus(id)));
+   });
+   
+ const addVirus = () =>
+ setViruses((prevViruses) => prevViruses.concat(getRandomVirus(v4())));
 
   const killVirus = (virusId: string) =>
     setViruses((prevViruses) => prevViruses.filter(({ id }) => id !== virusId));
