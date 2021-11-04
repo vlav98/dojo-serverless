@@ -1,4 +1,3 @@
-import { rawListeners } from 'process';
 import * as AwsConfig from 'serverless/aws';
 
 import ApiGatewayErrors from './resources/apiGatewayErrors';
@@ -10,7 +9,7 @@ const serverlessConfiguration: AwsConfig.Serverless = {
   configValidationMode: 'error',
   provider: {
     name: 'aws',
-    runtime: 'nodejs10.x',
+    runtime: 'nodejs12.x',
     region: 'eu-west-1',
     stage: 'dev',
     profile: 'dojo-serverless',
