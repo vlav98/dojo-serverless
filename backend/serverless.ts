@@ -16,7 +16,7 @@ const serverlessConfiguration: AwsConfig.Serverless = {
   configValidationMode: 'warn',
   provider: {
     name: 'aws',
-    runtime: 'nodejs10.x',
+    runtime: 'nodejs12.x',
     region: 'eu-west-1',
     stage: 'dev',
     profile: 'dojo-serverless',
