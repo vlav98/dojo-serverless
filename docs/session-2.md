@@ -23,6 +23,7 @@ Then, in the back-end folder, notice the new `dynamodb.yml` resource in the reso
 
 To deploy it:
 
+- Update serverless to the latest version with the command `npm install serverless@latest`
 - Add the dynamo-db table as a ressource in the `serverless.ts` (end of file)
 - Give your lambdas the IAM rights to `Query`, `Put` and `Delete` Items on this table by uncommenting the correct blocks in the `serverless.ts`.
 - Deploy your stack
