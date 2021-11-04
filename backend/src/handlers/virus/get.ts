@@ -1,15 +1,31 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
-import uuid from 'uuid';
+import { DynamoDB } from "aws-sdk";
 
+import { Virus } from './types';
 import { success } from '@libs/response';
 
-export const main: APIGatewayProxyHandler = async () => {
-  const viruses = [
-    { id: uuid() },
-    { id: uuid() },
-    { id: uuid() },
-    { id: uuid() },
-  ];
+var docClient = new DynamoDB.DocumentClient();
 
-  return success({ viruses });
-};
+
+export const main: APIGatewayProxyHandler = async () => {
+  var params = {
+    TableName: 'dojo-serverless-table',
+    KeyConditionExpression: 'partitionKey = :partitionKey',
+    ExpressionAttributeValues: {
+      ':partitionKey': 'Virus'
+     },
+  };
+
+  const { Items = [] } = await docClient
+    .query(params, function(err, data) {
+      if(err) {
+        console.log(err);
+      } else {
+        console.log(data.Items);
+      }
+    })
+    .promise();
+  console.log(Items)
+  return success({ viruses : (Items as Virus[]).map(({ sortKey }) => ({id : sortKey})),
+  })
+}; 
